@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FilmFootnote identifies film titles selected on the web and connects them to movie information and film platforms.">
+  <title>FilmFootnote — Film information, without leaving the page</title>
+  <style>
+    :root { color-scheme: light; --ink:#111; --muted:#686868; --line:#e7e7e7; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#fff; font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { width:min(940px, calc(100% - 40px)); margin:0 auto; padding:80px 0; }
+    .eyebrow { font-size:12px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); }
+    h1 { max-width:820px; margin:15px 0 20px; font-size:clamp(46px,8vw,92px); line-height:.92; letter-spacing:-.055em; }
+    .lead { max-width:660px; margin:0; color:var(--muted); font-size:20px; line-height:1.5; }
+    .demo { margin:70px 0; padding:30px; border:1px solid var(--line); border-radius:26px; background:#fafafa; }
+    .selection { display:inline; background:#1543a6; color:#fff; font-size:clamp(30px,6vw,64px); font-weight:800; line-height:1.2; }
+    .card { width:min(410px,100%); margin-top:22px; padding:20px; border:1px solid #ddd; border-radius:22px; background:#fff; box-shadow:0 20px 60px rgba(0,0,0,.13); }
+    .card h2 { margin:7px 0 3px; font-size:25px; }
+    .meta { color:var(--muted); }
+    .chips { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0; }
+    .chip { padding:6px 9px; border-radius:999px; background:#eee; font-size:12px; font-weight:700; }
+    .button { margin-top:8px; padding:13px; border-radius:13px; background:#111; color:#fff; font-weight:750; }
+    section { margin-top:70px; }
+    h3 { margin:0 0 14px; font-size:30px; }
+    p, li { color:var(--muted); line-height:1.65; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; }
+    .feature { padding:20px; border:1px solid var(--line); border-radius:18px; }
+    .feature strong { display:block; margin-bottom:7px; }
+    footer { margin-top:80px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; line-height:1.6; }
+    a { color:inherit; text-underline-offset:3px; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">FilmFootnote¹</div>
+  <h1>Every film title can become a footnote.</h1>
+  <p class="lead">Select a movie title on a webpage. FilmFootnote identifies the film and shows its poster, director, year, synopsis, runtime, genre, TMDB rating, and links to major film platforms.</p>
+
+  <div class="demo">
+    <div class="selection">The Lost Boys</div>
+    <div class="card">
+      <div class="eyebrow">FilmFootnote¹</div>
+      <h2>The Lost Boys</h2>
+      <div class="meta">1987 · Joel Schumacher</div>
+      <div class="chips">
+        <span class="chip">97 min</span>
+        <span class="chip">Horror</span>
+        <span class="chip">TMDB 7.1</span>
+      </div>
+      <div class="button">Open preferred platform ↗</div>
+    </div>
+  </div>
+
+  <section>
+    <h3>One selection, multiple film worlds.</h3>
+    <div class="grid">
+      <div class="feature"><strong>Identify</strong><span>Resolve a selected title into a real film, including ambiguous titles.</span></div>
+      <div class="feature"><strong>Understand</strong><span>See essential metadata without interrupting what you are reading.</span></div>
+      <div class="feature"><strong>Continue</strong><span>Open TMDB, Letterboxd, Douban, IMDb, or Rotten Tomatoes.</span></div>
+      <div class="feature"><strong>Personalize</strong><span>Choose which platform appears first in every card.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>How it works</h3>
+    <p>FilmFootnote runs only after you actively select text and click its small footnote button. The selected title is sent to FilmFootnote's Netlify function, which queries TMDB for matching movie information. FilmFootnote does not sell personal data or store browsing history.</p>
+  </section>
+
+  <footer>
+    <p><a href="/privacy.html">Privacy Policy</a> · Contact: <a href="mailto:captainanlie@gmail.com">captainanlie@gmail.com</a></p>
+    <p>This product uses the TMDB API but is not endorsed or certified by TMDB. Letterboxd, Douban, IMDb, Rotten Tomatoes, and TMDB are trademarks of their respective owners. FilmFootnote is an independent project.</p>
+  </footer>
+</main>
+</body>
+</html>

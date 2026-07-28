@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "FilmFootnote",
-  "version": "0.3.0",
-  "description": "Select a film title to identify it and view its poster, year, director, synopsis, TMDB rating, and links to film platforms.",
+  "version": "0.3.1",
+  "description": "Select a film or TV title to identify it and view its poster, year, creator/director, synopsis, TMDB rating, and links to major platforms.",
   "permissions": [
     "storage"
   ],

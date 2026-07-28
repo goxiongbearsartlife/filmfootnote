@@ -2,11 +2,11 @@
 
 **Every film title can become a footnote.**
 
-FilmFootnote is a Chrome browser extension that identifies a movie title selected on a webpage and presents a compact information card with the film's poster, year, director, synopsis, runtime, genre, TMDB rating, and links to TMDB, Letterboxd, Douban, IMDb, and Rotten Tomatoes.
+FilmFootnote is a Chrome browser extension that identifies a film or TV title selected on a webpage and presents a compact information card with the film's poster, year, director, synopsis, runtime, genre, TMDB rating, and links to TMDB, Letterboxd, Douban, IMDb, and Rotten Tomatoes. It now supports both movies and TV series.
 
 ## Product idea
 
-Movie information is fragmented across multiple platforms. Looking up a title interrupts the reading experience and often requires repeating the same search. FilmFootnote turns a movie title already present on the page into an interactive footnote.
+Movie information is fragmented across multiple platforms. Looking up a title interrupts the reading experience and often requires repeating the same search. FilmFootnote turns a film or TV title already present on the page into an interactive footnote.
 
 ## Interaction
 
@@ -39,7 +39,7 @@ TMDB API
 
 ```text
 extension/                 Chrome extension files
-netlify/functions/         Serverless movie-search function
+netlify/functions/         Serverless title-search function
 index.html                 Product landing page
 privacy.html               Public privacy policy
 netlify.toml               Netlify deployment configuration
@@ -53,7 +53,7 @@ PORTFOLIO_CASE_STUDY.md    Portfolio-ready project narrative
 2. Enable **Developer mode**.
 3. Click **Load unpacked**.
 4. Select the `extension` folder.
-5. Refresh a normal webpage, select a movie title, and click the small `¹` button.
+5. Refresh a normal webpage, select a film or TV title, and click the small `¹` button.
 
 ## Backend deployment
 

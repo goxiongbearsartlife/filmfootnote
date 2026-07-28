@@ -10,8 +10,8 @@
       label: "TMDB",
       mark: "T",
       url: (movie) => movie.id
-        ? `https://www.themoviedb.org/movie/${movie.id}`
-        : `https://www.themoviedb.org/search/movie?query=${encodeURIComponent(movie.title || movie.query)}`
+        ? `https://www.themoviedb.org/${movie.mediaType === "tv" ? "tv" : "movie"}/${movie.id}`
+        : `https://www.themoviedb.org/search?query=${encodeURIComponent(movie.title || movie.query)}`
     },
     letterboxd: {
       label: "Letterboxd",
@@ -131,7 +131,7 @@
 
     const loading = document.createElement("div");
     loading.className = "ff-loading";
-    loading.innerHTML = `<span class="ff-spinner"></span><span>Identifying film…</span>`;
+    loading.innerHTML = `<span class="ff-spinner"></span><span>Identifying title…</span>`;
     card.appendChild(loading);
     positionElement(card, rect, 10);
 
@@ -143,7 +143,7 @@
       const payload = await response.json();
 
       if (!response.ok) {
-        throw new Error(payload.error || "Movie lookup failed.");
+        throw new Error(payload.error || "Title lookup failed.");
       }
 
       if (!payload.results?.length) {
@@ -175,9 +175,9 @@
     const box = document.createElement("div");
     box.className = "ff-message";
     const strong = document.createElement("strong");
-    strong.textContent = "No movie found";
+    strong.textContent = "No film or TV title found";
     const span = document.createElement("span");
-    span.textContent = `Try selecting a more complete title than “${query}”.`;
+    span.textContent = `Try selecting a more complete film or TV title than “${query}”.`;
     box.append(strong, span);
     card.appendChild(box);
     positionElement(card, rect, 10);
@@ -188,7 +188,7 @@
     const box = document.createElement("div");
     box.className = "ff-message ff-error";
     const strong = document.createElement("strong");
-    strong.textContent = "Could not identify this film";
+    strong.textContent = "Could not identify this title";
     const span = document.createElement("span");
     span.textContent = message;
     box.append(strong, span);
@@ -201,7 +201,7 @@
 
     const label = document.createElement("div");
     label.className = "ff-candidate-label";
-    label.textContent = "Which film did you mean?";
+    label.textContent = "Which title did you mean?";
     card.appendChild(label);
 
     const list = document.createElement("div");
@@ -275,6 +275,8 @@
 
     const chips = document.createElement("div");
     chips.className = "ff-chips";
+    if (movie.mediaType === "tv") chips.appendChild(makeChip("TV"));
+    else if (movie.mediaType === "movie") chips.appendChild(makeChip("Movie"));
     if (movie.runtime) chips.appendChild(makeChip(`${movie.runtime} min`));
     if (movie.genres?.[0]) chips.appendChild(makeChip(movie.genres[0]));
     if (typeof movie.rating === "number") chips.appendChild(makeChip(`TMDB ${movie.rating.toFixed(1)}`));
@@ -328,7 +330,7 @@
 
     const footer = document.createElement("div");
     footer.className = "ff-footer";
-    footer.textContent = "Movie metadata and rating provided by TMDB. FilmFootnote is not endorsed or certified by TMDB.";
+    footer.textContent = "Film and TV metadata and rating provided by TMDB. FilmFootnote is not endorsed or certified by TMDB.";
     card.appendChild(footer);
 
     positionElement(card, rect, 10);

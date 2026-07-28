@@ -2,7 +2,7 @@
 
 ## One-line description
 
-A browser extension that turns movie titles found on the web into interactive film footnotes.
+A browser extension that turns film and TV titles found on the web into interactive film footnotes.
 
 ## Role
 
@@ -18,7 +18,7 @@ Movie information is scattered across databases, review communities, and regiona
 
 ## Concept
 
-FilmFootnote treats a movie title as an annotation point. The user selects the title already present on the webpage, and a compact layer appears beside it with enough context to understand the film and continue to a preferred platform.
+FilmFootnote treats a film or TV title as an annotation point. The user selects the title already present on the webpage, and a compact layer appears beside it with enough context to understand the film and continue to a preferred platform.
 
 ## Core interaction
 
@@ -79,7 +79,7 @@ A working Manifest V3 Chrome extension and serverless backend were designed, bui
 **FilmFootnote — Browser Extension Designer & Developer**  
 Independent Project, 2026
 
-Designed and developed a Chrome extension that identifies movie titles selected on webpages and displays posters, release information, directors, synopses, runtimes, genres, and TMDB ratings. Built a serverless Netlify backend for secure TMDB integration and created a cross-platform interface linking TMDB, Letterboxd, Douban, IMDb, and Rotten Tomatoes.
+Designed and developed a Chrome extension that identifies film and TV titles selected on webpages and displays posters, release information, directors, synopses, runtimes, genres, and TMDB ratings. Built a serverless Netlify backend for secure TMDB integration and created a cross-platform interface linking TMDB, Letterboxd, Douban, IMDb, and Rotten Tomatoes.
 
 ## Concise resume entry
 
@@ -88,7 +88,7 @@ Designed and developed a movie-identification browser extension using JavaScript
 
 ## Suggested portfolio page sequence
 
-1. Hero image: selected movie title with open FilmFootnote card  
+1. Hero image: selected film or TV title with open FilmFootnote card  
 2. Problem: fragmented film lookup  
 3. Interaction diagram  
 4. Interface anatomy  

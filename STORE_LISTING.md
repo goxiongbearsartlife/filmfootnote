@@ -6,7 +6,7 @@ FilmFootnote
 
 ## Summary
 
-Select a film title to identify it and open movie information across major film platforms.
+Select a film title to identify it and open film and TV information across major film platforms.
 
 ## Category
 
@@ -21,13 +21,13 @@ English
 
 FilmFootnote helps you identify a film without interrupting what you are reading.
 
-Select a movie title on almost any webpage and click the small FilmFootnote button beside the selected text. FilmFootnote identifies the matching movie and displays a compact card with its poster, release year, director, synopsis, runtime, genre, and TMDB rating.
+Select a film or TV title on almost any webpage and click the small FilmFootnote button beside the selected text. FilmFootnote identifies the matching movie and displays a compact card with its poster, release year, director, synopsis, runtime, genre, and TMDB rating.
 
 From the same card, you can continue to TMDB, Letterboxd, Douban, IMDb, or Rotten Tomatoes. You can also choose which platform appears first.
 
 Features:
 
-• Identify movie titles selected on webpages  
+• Identify film and TV titles selected on webpages  
 • View posters, release years, directors, synopses, runtimes, genres, and TMDB ratings  
 • Choose between candidates when multiple films share a title  
 • Open exact TMDB and IMDb pages when available  
@@ -38,14 +38,14 @@ Features:
 
 How to use:
 
-1. Select a movie title on a webpage.  
+1. Select a film or TV title on a webpage.  
 2. Click the small ¹ button beside the selection.  
-3. Review the identified movie information.  
+3. Review the identified film and TV information.  
 4. Open your preferred film platform.
 
 Privacy:
 
-FilmFootnote processes text only after you actively select it and click the FilmFootnote button. The selected title is sent to FilmFootnote's Netlify backend and TMDB to retrieve matching movie information. FilmFootnote does not sell personal data or intentionally store browsing history.
+FilmFootnote processes text only after you actively select it and click the FilmFootnote button. The selected title is sent to FilmFootnote's Netlify backend and TMDB to retrieve matching film and TV information. FilmFootnote does not sell personal data or intentionally store browsing history.
 
 FilmFootnote is an independent extension and is not affiliated with, endorsed by, or sponsored by Letterboxd, Douban, IMDb, Rotten Tomatoes, or TMDB.
 
@@ -53,7 +53,7 @@ This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 ## Single purpose
 
-FilmFootnote identifies a film title actively selected by the user on a webpage and displays movie information with links to film databases and review platforms.
+FilmFootnote identifies a film title actively selected by the user on a webpage and displays film and TV information with links to film databases and review platforms.
 
 ## Permission justification — storage
 
@@ -61,11 +61,11 @@ The storage permission saves the user's preferred film platform and technical ex
 
 ## Permission justification — host access
 
-FilmFootnote uses access to `https://filmfootnote.netlify.app/*` only to send a user-initiated movie-title query to its serverless backend and receive movie-search results.
+FilmFootnote uses access to `https://filmfootnote.netlify.app/*` only to send a user-initiated movie-title query to its serverless backend and receive title-search results.
 
 ## Content-script justification
 
-The content script runs on webpages so FilmFootnote can detect text actively selected by the user and display its movie-information card beside the selection. It does not continuously transmit webpage content. A lookup occurs only after the user selects text and clicks FilmFootnote.
+The content script runs on webpages so FilmFootnote can detect text actively selected by the user and display its title-information card beside the selection. It does not continuously transmit webpage content. A lookup occurs only after the user selects text and clicks FilmFootnote.
 
 ## Remote code
 
@@ -107,7 +107,7 @@ captainanlie@gmail.com
 1. **Select a film title and identify it instantly**  
    Show a real webpage with “The Lost Boys” selected and the FilmFootnote card open.
 
-2. **See essential movie information without leaving the page**  
+2. **See essential film and TV information without leaving the page**  
    Show the poster, year, director, synopsis, runtime, genre, and TMDB rating.
 
 3. **Continue to your preferred film platform**  

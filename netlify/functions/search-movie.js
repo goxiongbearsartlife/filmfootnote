@@ -1,6 +1,91 @@
-
 const TMDB_BASE = "https://api.themoviedb.org/3";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w342";
+
+function normalize(text = "") {
+  return text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+}
+
+async function tmdbFetch(path, token, params = {}) {
+  const url = new URL(`${TMDB_BASE}${path}`);
+  for (const [key, value] of Object.entries(params)) {
+    url.searchParams.set(key, String(value));
+  }
+
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      accept: "application/json"
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error(`TMDB request failed (${res.status}) for ${path}.`);
+  }
+
+  return res.json();
+}
+
+function scoreCandidate(query, item) {
+  const q = normalize(query);
+  const title = normalize(item.title || item.name || "");
+  const original = normalize(item.original_title || item.original_name || "");
+  const exact = q === title || q === original;
+  const starts = title.startsWith(q) || original.startsWith(q);
+
+  return {
+    exact,
+    starts,
+    sort: [
+      exact ? 1 : 0,
+      starts ? 1 : 0,
+      Number(item.vote_count || 0),
+      Number(item.popularity || 0)
+    ]
+  };
+}
+
+async function buildDetail(query, token, item, mediaType, rankIndex) {
+  const detail = await tmdbFetch(
+    `/${mediaType}/${item.id}`,
+    token,
+    { append_to_response: "credits,external_ids", language: "en-US" }
+  );
+
+  const title = mediaType === "tv" ? detail.name : detail.title;
+  const originalTitle = mediaType === "tv" ? detail.original_name : detail.original_title;
+  const year = mediaType === "tv"
+    ? (detail.first_air_date ? detail.first_air_date.slice(0, 4) : "")
+    : (detail.release_date ? detail.release_date.slice(0, 4) : "");
+
+  const director = mediaType === "movie"
+    ? (detail.credits?.crew?.find((person) => person.job === "Director")?.name || "")
+    : (detail.created_by?.[0]?.name || detail.credits?.crew?.find((person) => person.job === "Director")?.name || "");
+
+  const roleLabel = mediaType === "movie" ? "Director" : "Creator";
+  const runtime = mediaType === "movie"
+    ? (detail.runtime || null)
+    : (detail.episode_run_time?.[0] || null);
+
+  const { exact } = scoreCandidate(query, item);
+
+  return {
+    id: detail.id,
+    mediaType,
+    title,
+    originalTitle,
+    year,
+    director,
+    roleLabel,
+    overview: detail.overview || "",
+    runtime,
+    genres: (detail.genres || []).map((g) => g.name),
+    rating: typeof detail.vote_average === "number" ? detail.vote_average : null,
+    voteCount: detail.vote_count || 0,
+    posterUrl: detail.poster_path ? `${IMAGE_BASE}${detail.poster_path}` : "",
+    imdbId: detail.external_ids?.imdb_id || "",
+    confidence: exact && rankIndex === 0 ? "high" : "normal"
+  };
+}
 
 exports.handler = async function(event) {
   const headers = {
@@ -27,64 +112,42 @@ exports.handler = async function(event) {
     return {
       statusCode: 400,
       headers,
-      body: JSON.stringify({ error: "Missing movie title." })
+      body: JSON.stringify({ error: "Missing title." })
     };
   }
 
   try {
-    const searchUrl = new URL(`${TMDB_BASE}/search/movie`);
-    searchUrl.searchParams.set("query", query);
-    searchUrl.searchParams.set("include_adult", "false");
-    searchUrl.searchParams.set("language", "en-US");
+    const commonParams = { query, include_adult: "false", language: "en-US" };
 
-    const searchRes = await fetch(searchUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        accept: "application/json"
-      }
-    });
+    const [movieSearch, tvSearch] = await Promise.all([
+      tmdbFetch("/search/movie", token, commonParams),
+      tmdbFetch("/search/tv", token, commonParams)
+    ]);
 
-    if (!searchRes.ok) {
-      throw new Error(`TMDB search failed (${searchRes.status}).`);
-    }
+    const merged = [
+      ...(movieSearch.results || []).slice(0, 5).map((item) => ({ ...item, mediaType: "movie" })),
+      ...(tvSearch.results || []).slice(0, 5).map((item) => ({ ...item, mediaType: "tv" }))
+    ];
 
-    const searchData = await searchRes.json();
-    const baseResults = (searchData.results || []).slice(0, 5);
+    const ranked = merged
+      .map((item) => ({ item, scoring: scoreCandidate(query, item) }))
+      .sort((a, b) => {
+        const sa = a.scoring.sort;
+        const sb = b.scoring.sort;
+        for (let i = 0; i < sa.length; i++) {
+          if (sb[i] !== sa[i]) return sb[i] - sa[i];
+        }
+        return 0;
+      })
+      .slice(0, 6);
 
     const details = await Promise.all(
-      baseResults.map(async (movie, index) => {
-        const detailUrl = `${TMDB_BASE}/movie/${movie.id}?append_to_response=credits,external_ids&language=en-US`;
-        const detailRes = await fetch(detailUrl, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            accept: "application/json"
-          }
-        });
-
-        if (!detailRes.ok) return null;
-        const d = await detailRes.json();
-        const director = d.credits?.crew?.find((person) => person.job === "Director")?.name || "";
-        const year = d.release_date ? d.release_date.slice(0, 4) : "";
-        const normalizedQuery = query.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-        const normalizedTitle = (d.title || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-        const normalizedOriginal = (d.original_title || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-        const exact = normalizedQuery === normalizedTitle || normalizedQuery === normalizedOriginal;
-
-        return {
-          id: d.id,
-          title: d.title,
-          originalTitle: d.original_title,
-          year,
-          director,
-          overview: d.overview || "",
-          runtime: d.runtime || null,
-          genres: (d.genres || []).map((g) => g.name),
-          rating: typeof d.vote_average === "number" ? d.vote_average : null,
-          voteCount: d.vote_count || 0,
-          posterUrl: d.poster_path ? `${IMAGE_BASE}${d.poster_path}` : "",
-          imdbId: d.external_ids?.imdb_id || "",
-          confidence: exact && index === 0 ? "high" : "normal"
-        };
+      ranked.map(async ({ item }, index) => {
+        try {
+          return await buildDetail(query, token, item, item.mediaType, index);
+        } catch {
+          return null;
+        }
       })
     );
 

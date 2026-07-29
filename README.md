@@ -83,9 +83,16 @@ This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 Letterboxd, Douban, IMDb, Rotten Tomatoes, and TMDB are trademarks of their respective owners. FilmFootnote is an independent project.
 
+
+
 ## Status
 
-Working prototype prepared for Chrome Web Store review.
+**FilmFootnote 0.3.0**
+
+- Published on the Chrome Web Store
+- Supports movies and TV series
+- TMDB-powered metadata
+- Cross-platform film lookup
 
 ## Creator
 

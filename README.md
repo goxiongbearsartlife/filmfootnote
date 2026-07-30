@@ -97,7 +97,7 @@ Letterboxd, Douban, IMDb, Rotten Tomatoes, and TMDB are trademarks of their resp
 
 ## Status
 
-**FilmFootnote 0.3.0**
+**FilmFootnote 0.3.2**
 
 - Published on the Chrome Web Store
 - Supports movies and TV series
@@ -106,4 +106,4 @@ Letterboxd, Douban, IMDb, Rotten Tomatoes, and TMDB are trademarks of their resp
 
 ## Creator
 
-Designed and developed by **Yian Li**, 2026.
+Designed and developed by [**Yian Li**](https://www.instagram.com/goxiongbearsartlife/), 2026.

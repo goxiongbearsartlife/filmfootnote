@@ -1,8 +1,18 @@
+
+
 # FilmFootnote¹
 
 **Every film title can become a footnote.**
 
-FilmFootnote is a Chrome browser extension that identifies a film or TV title selected on a webpage and presents a compact information card with the film's poster, year, director, synopsis, runtime, genre, TMDB rating, and links to TMDB, Letterboxd, Douban, IMDb, and Rotten Tomatoes. It now supports both movies and TV series.
+FilmFootnote is a published Chrome browser extension that identifies a film or TV title selected on a webpage and presents a compact information card with the film's poster, year, director, synopsis, runtime, genre, TMDB rating, and links to major film platforms TMDB, Letterboxd, Douban, IMDb, and Rotten Tomatoes. It now supports both movies and TV series.
+
+### Install
+
+[Install FilmFootnote on the Chrome Web Store](https://chromewebstore.google.com/detail/meneblpmeljjeamefccohmogdcnlndcn)
+
+### Website
+
+https://filmfootnote.netlify.app/
 
 ## Product idea
 

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FilmFootnote demo page for testing film and TV title lookup.">
+  <title>Film Journal — FilmFootnote Demo</title>
+  <style>
+    :root{
+      --bg:#090b0f;
+      --panel:#0d1016;
+      --ink:#f5f5f1;
+      --muted:#999da7;
+      --line:rgba(255,255,255,.15);
+      --blue:#1d4fff;
+      --blue-soft:#8aa1ff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Georgia,"Times New Roman",serif;
+    }
+    .wrap{
+      width:min(1180px,calc(100% - 48px));
+      margin:0 auto;
+      padding:32px 0 88px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding-bottom:18px;
+      border-bottom:1px solid var(--line);
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .brand{
+      font-size:12px;
+      letter-spacing:.36em;
+      text-transform:uppercase;
+    }
+    nav{
+      display:flex;
+      gap:28px;
+      color:#888d98;
+      font-size:10px;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);
+      gap:72px;
+      padding-top:62px;
+      align-items:start;
+    }
+    .kicker{
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--blue);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    h1{
+      margin:17px 0 22px;
+      max-width:720px;
+      font-size:clamp(46px,5vw,74px);
+      line-height:.98;
+      letter-spacing:-.045em;
+      font-weight:500;
+    }
+    .dek{
+      max-width:720px;
+      color:#a7abb4;
+      font-size:19px;
+      line-height:1.55;
+    }
+    article{
+      max-width:780px;
+      margin-top:42px;
+      color:#e8e8e5;
+      font-size:21px;
+      line-height:1.72;
+    }
+    article p{margin:0 0 27px}
+    .film{
+      color:#fff;
+      font-weight:700;
+      text-decoration-thickness:1px;
+      text-underline-offset:4px;
+      cursor:text;
+    }
+    aside{
+      position:sticky;
+      top:32px;
+      padding-top:72px;
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .note{
+      padding:16px 0 18px;
+      border-top:1px solid var(--line);
+    }
+    .note strong{
+      display:block;
+      margin-bottom:7px;
+      font-size:11px;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .note span{
+      display:block;
+      color:#828791;
+      font-size:12px;
+      line-height:1.55;
+    }
+    .demo-tip{
+      margin-top:28px;
+      padding:18px;
+      border:1px solid rgba(29,79,255,.55);
+      border-radius:14px;
+      background:rgba(29,79,255,.07);
+    }
+    .demo-tip b{
+      display:block;
+      margin-bottom:7px;
+      color:var(--blue-soft);
+      font-size:12px;
+    }
+    .demo-tip p{
+      margin:0;
+      color:#adb1bb;
+      font-size:12px;
+      line-height:1.55;
+    }
+    .suggestions{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .suggestions span{
+      padding:7px 9px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:999px;
+      color:#b4b7bf;
+      font-size:10px;
+    }
+    .footer{
+      margin-top:78px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:#676b74;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:10px;
+      letter-spacing:.09em;
+    }
+    @media(max-width:860px){
+      .hero{grid-template-columns:1fr;gap:24px}
+      aside{position:static;padding-top:0}
+      nav{display:none}
+      article{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">Film Journal</div>
+      <nav>
+        <span>Reviews</span>
+        <span>Features</span>
+        <span>Interviews</span>
+        <span>Archive</span>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <main>
+        <div class="kicker">Night Movies / Issue 07</div>
+
+        <h1>Vampires, Rebellion,<br>and the Outsiders</h1>
+
+        <div class="dek">
+          A short note on films and television that turn adolescence into a nocturnal landscape:
+          neon, danger, desire, and the feeling that adulthood is arriving too fast.
+        </div>
+
+        <article>
+          <p>
+            Few films of the 1980s capture the collision of adolescence and the supernatural
+            quite like <span class="film">The Lost Boys</span>. Joel Schumacher's film turns
+            Santa Cruz into a neon-lit dream of motorcycles, comic books, boardwalks, and
+            beautiful strangers who may not be what they seem.
+          </p>
+
+          <p>
+            Decades earlier, Alfred Hitchcock's <span class="film">Psycho</span> transformed
+            an ordinary roadside motel into one of cinema's most enduring spaces of anxiety.
+            Its influence survives not only in horror, but in the way films teach us to distrust
+            familiar architecture.
+          </p>
+
+          <p>
+            Television inherited many of those ideas. <span class="film">Twin Peaks</span>
+            folds melodrama, murder mystery, and dream logic into a town where every room seems
+            to conceal another version of reality.
+          </p>
+
+          <p>
+            The more recent <span class="film">Severance</span> turns the office into a psychological
+            labyrinth, where architecture becomes both corporate system and fractured memory.
+          </p>
+
+          <p>
+            And then there is <span class="film">On the Silver Globe</span>, a work that feels
+            less like conventional science fiction than an archaeological fragment from a
+            civilization that never existed.
+          </p>
+        </article>
+      </main>
+
+      <aside>
+        <div class="note">
+          <strong>Issue</strong>
+          <span>07 — Night Movies</span>
+        </div>
+
+        <div class="note">
+          <strong>Reading time</strong>
+          <span>6 minutes</span>
+        </div>
+
+        <div class="note">
+          <strong>Titles mentioned</strong>
+          <span>
+            The Lost Boys<br>
+            Psycho<br>
+            Twin Peaks<br>
+            Severance<br>
+            On the Silver Globe
+          </span>
+        </div>
+
+        <div class="demo-tip">
+          <b>FilmFootnote¹ demo</b>
+          <p>
+            Select any film or TV title in the article, then click the small ¹ button that appears.
+          </p>
+
+          <div class="suggestions">
+            <span>The Lost Boys</span>
+            <span>Psycho</span>
+            <span>Twin Peaks</span>
+            <span>Severance</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="footer">
+      FILM JOURNAL — DEMO PAGE FOR FILMFOOTNOTE¹
+    </div>
+  </div>
+</body>
+</html>

@@ -74,6 +74,7 @@ PORTFOLIO_CASE_STUDY.md    Portfolio-ready project narrative
 3. Redeploy.
 4. Test:
    `https://filmfootnote.netlify.app/.netlify/functions/search-movie?q=The%20Lost%20Boys`
+   https://filmfootnote.netlify.app/demo.html
 
 Never commit a real TMDB token or `.env` file.
 
